@@ -14,6 +14,8 @@
     and flattening the end structure into a list of lines. Revision 2 maybe ^.^.
 """
 
+import os
+
 def sort_blocks():
     # First, we load the current README into memory
     with open('README.md', 'r') as read_me_file:
@@ -39,7 +41,7 @@ def sort_blocks():
     blocks[0] = inner_blocks
     final_README = table_of_contents + '- - -' + ''.join(blocks)
 
-    with open('README.md', 'w+') as sorted_file:
+    with open('README.md', 'w') as sorted_file:
         sorted_file.write(final_README)
 
 def main():
@@ -67,7 +69,7 @@ def main():
             blocks.append([line])
             last_indent = None
 
-    with open('README.md', 'w+') as sorted_file:
+    with open('README.md', 'w') as sorted_file:
         # Then all of the blocks are sorted individually
         blocks = [
             ''.join(sorted(block, key=str.lower)) for block in blocks
@@ -77,7 +79,6 @@ def main():
 
     # Then we call the sorting method
     sort_blocks()
-
 
 if __name__ == "__main__":
     main()
